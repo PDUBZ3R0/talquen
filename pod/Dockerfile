@@ -9,14 +9,13 @@ ENV BOT_VMAJ=143
 ENV BOT_VMIN=0.7499.194
 ENV BOT_DATE=20260108
 
+
 # Update all packages from base image
 ##================================## 
-
 RUN apt update && apt dist-upgrade -y
 
 # Dependencies
 ##================================## 
-
 RUN apt-get install -y \
     xvfb dbus-x11 ca-certificates \
     libnss3 libxss1 libasound2 libatk1.0-0 libatk-bridge2.0-0 \
@@ -46,21 +45,24 @@ RUN apt install /tmp/bot.deb -y
 ##================================##
 RUN apt autoremove -y && apt clean
 RUN npm install -g npm@latest
+RUN npm install -g bun
 RUN rm -rf /root/.cache/apt/ 
 
 
 # Setup User Space
 ##================================##
 USER pptruser
-WORKDIR /home/pptruser/
-RUN cd /home/pptruser/
-COPY *.js* *.sh .
+
 RUN mkdir -p /home/pptruser/profiles/
 RUN wget https://github.com/botswin/BotBrowser/blob/main/profiles/v$BOT_VMAJ/chrome$(echo $BOT_VMAJ)_android13.enc -O /home/pptruser/profiles/android.enc
 RUN wget https://github.com/botswin/BotBrowser/blob/main/profiles/v$BOT_VMAJ/chrome$(echo $BOT_VMAJ)_mac_arm64.enc -O /home/pptruser/profiles/mac.enc
 RUN wget https://github.com/botswin/BotBrowser/blob/main/profiles/v$BOT_VMAJ/chrome$(echo $BOT_VMAJ)_win10_x64.enc -O /home/pptruser/profiles/win.enc
 
-RUN npm install
+WORKDIR /home/pptruser/
+RUN cd /home/pptruser/
+COPY package.json *.js* *.sh .
+RUN bun install
+RUN rm -rf /home/pptruser/.cache/bun/
 RUN rm -rf /home/pptruser/.cache/npm/
 
 CMD ["bash", "starter.sh"]

@@ -27,4 +27,4 @@ echo "$VERSION_BOT (location: $BROWSER_BOT)"
 echo "/home/pptruser/profiles/"
 ls /home/pptruser/profiles/ -al
 
-node server.js
+bun server.js

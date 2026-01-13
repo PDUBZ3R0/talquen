@@ -1,17 +1,18 @@
 {
-  "name": "captivating/podman",
+  "name": "@captivating/podman",
   "version": "2.0.1",
-
   "type": "module",
   "license": "MIT",
-
   "dependencies": {
     "uuid": "^11.1.0",
     "ws": "^8.18.3",
     "xvfb-ts": "^1.1.0"
   },
-
+  "devDependencies": {
+    "gradient-string": "^3.0.0",
+  },
   "scripts": {
+    "preinstall": "node @banner.js",
     "build": "podman build -t captivating .",
     "start": "podman run --replace --network podman --name captivating -p 42200-42220:42200-42220 -dt captivating"
   }

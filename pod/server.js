@@ -97,7 +97,7 @@ function handleRequest(respond, { action, profile, config, port, method }) {
 			if (elapsed > MAX_IDLE) {
 				controller.abort();
 			}
-		})
+		},500);
 
 		let portstatus = pool[portnum] = { status: STATUS.INUSE, since: new Date().getTime(), controller, idlecheck };
 
@@ -133,7 +133,6 @@ function handleRequest(respond, { action, profile, config, port, method }) {
 			let portnum = openport();
 			if (portnum) {
 				clearInterval(intv);
-
 				launcher(portnum);
 			}
 		}, 5000);

@@ -30,14 +30,21 @@ export class BotBrowserConfig {
 	}
 
 	brand(name) {
-		if (["chrome", "chromium", "edge", "brave"].includes(name)) {
+		const VALID = ["chrome", "chromium", "edge", "brave"];
+		if (VALID.includes(name)) {
 			this.profile.browserBrand = name
+		} else {
+			console.warn("unknown brand requested:", name, "\nvalid brands are:", VALID);
 		}
 	}
 
 	platform(name) {
-		if (["mac", "win", "android"].includes(name)) {
+		const VALID = ["win", "mac", "android"];
+		if (VALID.includes(name)) {
 			this.filename = name;
+		} else {
+			console.warn("unknown platform requested:", name, "\nvalid platforms are:", VALID, "default will be used:", VALID[0]);
+			this.filename = VALID[0];
 		}
 	}
 
@@ -72,18 +79,17 @@ export class BotBrowserConfig {
 				dims = dimensions(1440, 900, d || 24);break;
 			case 1280:
 				dims = dimensions(1280, 1024, d || 16);break;
-			default:
-				dims.screen = undefined
-				dims.window = undefined
-				break;
 			case 1024:
 				dims = dimensions(1024, 768, d || 16);break;
 			case 800:
 				dims = dimensions(800, 600, d || 8);break;
+			default:
+				resolution(1280);
 		}
-
-		this.profile.screen = dims.screen
-		this.profile.resolution = dims.window
+		if (dims) {
+			this.profile.screen = dims.screen
+			this.profile.resolution = dims.window
+		}
 	}
 
 	proxy(url) {
