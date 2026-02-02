@@ -15,6 +15,18 @@
     "ws": "^8.18.3"
   },
   "scripts": {
-    "deploy": "cd pod && bun run build && bun run start"
-  }
+    "deploy": "cd pod && npm run build && npm run start"
+  },
+  "keywords": [
+    "playwright",
+    "container",
+    "docker",
+    "podman",
+    "botbrowser",
+    "stealth",
+    "http",
+    "https",
+    "socks4",
+    "socks5"
+  ]
 }
