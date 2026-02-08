@@ -1,4 +1,3 @@
-
 function dimensions (w,h,d=24) {
 	return {
 		screen: {width: w, height: h, colorDepth: d, pixelDepth: d},
@@ -21,7 +20,7 @@ export class BotBrowserConfig {
 		this.filename = "win";
 	}
 
-	colorScheme(dark) {
+	darkScheme(dark) {
 		if (dark) {
 			this.profile.colorScheme = "dark";
 		} else {
@@ -48,8 +47,8 @@ export class BotBrowserConfig {
 		}
 	}
 
-	injectRandomHistory(disable) {
-		if (disable !== false) {
+	injectRandomHistory(enable) {
+		if (enable === true) {
 			this.profile.injectRandomHistory = true;
 		} else {
 			this.profile.injectRandomHistory = undefined;
@@ -92,14 +91,6 @@ export class BotBrowserConfig {
 		}
 	}
 
-	proxy(url) {
-		this.profile.proxy = url
-	}
-
-	cookies(jar) {
-		this.profile.cookies = jar
-	}
-
 	toString(){
 		return JSON.stringify({
 			action: this.action,
@@ -133,15 +124,15 @@ export class BotBrowserConfig {
 		let r_cs = Math.random();
 		if (r_reso > 0.95) {
 			c.resolution(1680)
-			if (r_cs > 0.75) c.colorScheme(true); 
+			if (r_cs > 0.75) c.darkScheme(true); 
 		} else if (r_reso > 0.9) {
 			c.resolution(1440)
-			if (r_cs > 0.65) c.colorScheme(true); 
+			if (r_cs > 0.65) c.darkScheme(true); 
 		} else if (r_reso > 0.875) {
 			c.resolution(1600)
-			if (r_cs > 0.85) c.colorScheme(true); 
+			if (r_cs > 0.85) c.darkScheme(true); 
 		} else if (r_reso > 0.85) {
-			if (r_cs > 0.9) c.colorScheme(true); 
+			if (r_cs > 0.9) c.darkScheme(true); 
 			c.resolution(1280, r_depth > 0.25 ? 24 : 16)
 		} else if (r_reso > 0.825) {
 			c.resolution(1024, r_depth > 0.65 ? 24 : 16)
@@ -149,12 +140,12 @@ export class BotBrowserConfig {
 			c.resolution(800, r_depth > 0.75 ? 16 : 8)
 		} else if (r_reso > 0.5) {
 			c.resolution(3840)
-			if (r_cs > 0.4) c.colorScheme(true); 
+			if (r_cs > 0.4) c.darkScheme(true); 
 		} else if (r_reso > 0.15) {
 			c.resolution(1920)
-			if (r_cs > 0.5) c.colorScheme(true); 
+			if (r_cs > 0.5) c.darkScheme(true); 
 		} else {
-			if (r_cs > 0.65) c.colorScheme(true); 
+			if (r_cs > 0.65) c.darkScheme(true); 
 		}
 
 		let r_rh = Math.random();

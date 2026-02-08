@@ -5,16 +5,18 @@ import { PoolIdleConnectionPlugin } from './idle.js'
 import { BotBrowserConfig } from './config.js'
 import { WebSocket } from 'ws'
 
-export const BrowserConf = BotBrowserConfig;
+export const Fingerprinting = BotBrowserConfig;
 
 function factory(action) {
-	return function(config) {
-		if (!config) config = configure();
+	return function({ server="localhost", proxy, cookies, fingerprinting }) {
+		let config = fingerprinting || configure();
 
 		config.action = action;
+		config.profile.proxy = proxy;
+		config.profile.cookies = cookies;
 
 		return new Promise((resolve,reject)=>{
-			const ws = new WebSocket('ws://localhost:42200/');
+			const ws = new WebSocket(`ws://${server}:42200/`);
 			let handled = false;
 
 			function err(e) {
@@ -37,7 +39,7 @@ function factory(action) {
 							ws.send(JSON.stringify({ action: "activity", method, port: res.port }));
 						}}))
 
-						chromium.connectOverCDP('http://localhost:'+res.port).then(browser=>{
+						chromium.connectOverCDP(`http://${server}:${res.port}`).then(browser=>{
 
 							browser.close = browser.disconnect = function() {
 								ws.send(JSON.stringify({ action: "close", port: res.port }));
@@ -73,8 +75,8 @@ export function randomize() {
 	return BotBrowserConfig.randomize();
 }
 
-export function destroy() {
-	const ws = new WebSocket('ws://localhost:42200/');
+export function destroy(server="localhost") {
+	const ws = new WebSocket(`ws://${server}:42200/`);
 	ws.on('error', console.error);
 
 	ws.on('open', function open() {

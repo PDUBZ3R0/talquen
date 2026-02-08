@@ -2,9 +2,9 @@
 import { wait, randomize } from './index.js'
 import { load } from 'cheerio'
 
-export async function hybrid() {
+export async function hybrid({ server, proxy, cookies }) {
 	return new Promise(async r1=>{
-		const browser = await wait(randomize());
+		const browser = await wait({ server, proxy, cookies, fingerprinting: randomize() });
 		const page = await browser.newPage();
 		
 		const api = {

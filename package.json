@@ -1,6 +1,6 @@
 {
   "name": "talquen",
-  "version": "1 0.1",
+  "version": "1.0.0-rc1",
   "type": "module",
   "exports": {
     ".": "./index.js",
@@ -12,9 +12,11 @@
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "gradient-string": "^3.0.0",
     "ws": "^8.18.3"
   },
   "scripts": {
+    "preinstall": "node @banner.js",
     "deploy": "cd pod && npm run build && npm run start"
   },
   "keywords": [
