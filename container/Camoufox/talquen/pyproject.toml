@@ -1,0 +1,13 @@
+[project]
+name = "talquen-camoufox"
+version = "1.0.0"
+description = "talquen podman container managing multiple camoufox instances"
+requires-python = ">=3.12"
+dependencies = [
+    "asyncio>=4.0.0",
+    "camoufox[geoip]>=0.4.11",
+    "psutil>=7.2.2",
+    "uuid>=1.30",
+    "websockets>=16.0",
+    "playwright==1.53.0"
+]

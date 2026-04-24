@@ -1,6 +1,6 @@
 {
   "name": "talquen",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0",
   "type": "module",
   "exports": {
     ".": "./index.js",
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "cheerio": "^1.1.2",
-    "playwright-core": "^1.55.0",
+    "playwright-core": "1.53.0",
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
@@ -17,7 +17,9 @@
   },
   "scripts": {
     "preinstall": "node @banner.js",
-    "deploy": "cd pod && npm run build && npm run start"
+    "update": "cd container && npm run update",
+    "deploy": "cd container && npm run deploy",
+    "test": "node test/index.js"
   },
   "keywords": [
     "playwright",

@@ -5,7 +5,7 @@ import { PuppeteerExtraPlugin } from 'puppeteer-extra-plugin';
 function activityMonitor(target, methodName, handler) {
     const originalCode = target[methodName];
     target[methodName] = (...args) => {
-        handler(name);
+        handler(methodName);
         return originalCode.apply(target, args)
     };
 }

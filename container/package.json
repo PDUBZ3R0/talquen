@@ -1,0 +1,12 @@
+{
+  "name": "talquen-podman",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "base": "cd Base && podman build -t talquen-basix .",
+    "build": "cd Camoufox && podman build -t talquen-camoufox .",
+    "start": "podman run --replace --network podman --name talquen-camoufox -p 42200-42220:42200-42220 -dt talquen-camoufox",
+    "deploy": "yarn run build && yarn run start",
+    "update": "yarn run base && yarn run deploy"
+  }
+}
