@@ -1,5 +1,5 @@
 ## talquen
-A podman/docker install of BotBrowser with a Playwright client.
+A podman/docker install of Camoufox with a Playwright client.
 
 This project has a submodule [**hybrid**](HYBRID.md): a simple http client for requesting the source or DOM of a URL using an instance of talquen.
 
