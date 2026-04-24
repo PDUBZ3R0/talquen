@@ -1,16 +1,25 @@
 ## talquen
-A podman/docker install of Camoufox with a Playwright client.
+A Playwright client for accessing a pool of available Camoufox Browser instances deployed as a Podman/Docker container, can be used locally or remotely.
 
-This project has a submodule [**hybrid**](HYBRID.md): a simple http client for requesting the source or DOM of a URL using an instance of talquen.
+This project has a submodule [**hybrid**](HYBRID.md): a simple http client for requesting the source or DOM of a URL using an instance of talquen,
+for times when a pure http/s client like [**toltha**](/PDUBZ3R0/toltha/) isn't enough and you need a real stealth browser instance, but you only
+need to load pages by their URLs and scrape them, for those cases where no interaction is necessary. Examples of this might be: needing to get past
+a captcha or cloudflare turnstile that a browser bypasses automatically, need to scrape a page that renders immediately but only if its javascript 
+is executed, etc... you get the idea. Setting up an interchangeable talquen/toltha fetch of data, with common logic to parse from the returned source
+or access the data from the DOM (uses cheerio) is a simple and elegant solution for multiple sites needing basic scraping, with custom talquen modules
+containing Playwright logic for interacting with the sites that require it.
 
 To deploy checkout this project from github and 	`npm run deploy`
+
+### Basic example:
 
 ```javascript
 import talquen from 'talquen'
 const browser = await talquen.wait();
+const page = await browser.newPage();
 ```
-### methods
 
+### The difference between talquen's 2 methods:
 
 + **launch** `({ server, proxy, cookies, fingerprint })` launch a browser instance, returns a Promise. <br/>
 If there is a slot available the browser is initialized and the Promise resolves when it's ready, otherwise it rejects immediately. 
