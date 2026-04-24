@@ -1,6 +1,8 @@
 ## talquen
 A Playwright client for accessing a pool of available Camoufox Browser instances deployed as a Podman/Docker container, can be used locally or remotely.
 
+### Introducing the hybrid scraper:
+
 This project has a submodule [**hybrid**](HYBRID.md): a simple http client for requesting the source or DOM of a URL using an instance of talquen,
 for times when a pure http/s client like [**toltha**](/PDUBZ3R0/toltha/) isn't enough and you need a real stealth browser instance, but you only
 need to load pages by their URLs and scrape them, for those cases where no interaction is necessary. Examples of this might be: needing to get past
@@ -9,7 +11,11 @@ is executed, etc... you get the idea. Setting up an interchangeable talquen/tolt
 or access the data from the DOM (uses cheerio) is a simple and elegant solution for multiple sites needing basic scraping, with custom talquen modules
 containing Playwright logic for interacting with the sites that require it.
 
-To deploy checkout this project from github and 	`npm run deploy`
+### Deploying the container:
+
++ You need podman or docker running on your local system or remote server to deploy the container to either of these locations.
++ To deploy the container checkout this project (locally or on your remote server).
++ `npm run deploy`
 
 ### Basic example:
 
