@@ -8,17 +8,19 @@
   },
   "dependencies": {
     "cheerio": "^1.1.2",
+    "is-npm": "^6.1.0",
     "playwright-core": "1.53.0",
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin": "^3.2.3",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "gradient-string": "^3.0.0",
     "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "gradient-string": "^3.0.0"
   },
   "scripts": {
     "preinstall": "node @banner.js",
-    "update": "cd container && npm run update",
-    "deploy": "cd container && npm run deploy",
+    "update": "cd container && node ../pm.js run update",
+    "deploy": "cd container && node ../pm.js run deploy",
     "test": "node test/index.js"
   },
   "keywords": [
@@ -26,7 +28,8 @@
     "container",
     "docker",
     "podman",
-    "botbrowser",
+    "camoufox",
+    "pool",
     "stealth",
     "http",
     "https",

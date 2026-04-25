@@ -2,11 +2,13 @@
   "name": "talquen-podman",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "base": "cd Base && podman build -t talquen-basix .",
-    "build": "cd Camoufox && podman build -t talquen-camoufox .",
-    "start": "podman run --replace --network podman --name talquen-camoufox -p 42200-42220:42200-42220 -dt talquen-camoufox",
-    "deploy": "yarn run build && yarn run start",
-    "update": "yarn run base && yarn run deploy"
+    "container": "node ../detect.js",
+    "base": "node ../pm.js run container -- build -t talquen-basix Base",
+    "build": "node ../pm.js run container -- build -t talquen-camoufox Camoufox",
+    "start": "node ../pm.js run container -- run --replace --name talquen-camoufox -p 42200-42220:42200-42220 -dt talquen-camoufox",
+    "update": "node ../pm.js run build && npm run start",
+    "deploy": "node ../pm.js run base && npm run update"
   }
 }

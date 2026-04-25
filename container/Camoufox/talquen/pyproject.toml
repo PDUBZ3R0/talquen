@@ -9,5 +9,6 @@ dependencies = [
     "psutil>=7.2.2",
     "uuid>=1.30",
     "websockets>=16.0",
-    "playwright==1.53.0"
+    "playwright==1.53.0",
+    "schedule>=1.2.2",
 ]

@@ -9,6 +9,7 @@ import os
 import threading
 import requests
 import camoufoxserver
+import schedule
 
 from uuid import uuid4
 from enum import Enum
@@ -217,7 +218,11 @@ async def perfmon():
     log2(statlog, "/var/log/talquen/usage.log", True)
 
 async def main():
-    intv = setInterval(perfmon, PERFMON_SECONDS)
+    schedule.every().hour.at(":00").do(perfmon);
+    schedule.every().hour.at(":15").do(perfmon);
+    schedule.every().hour.at(":30").do(perfmon);
+    schedule.every().hour.at(":45").do(perfmon);
+
     print(f"Websocket Server Listening on: {IP}:{PORT} for talquen client requests.")
     
     async with websockets.serve(servo, IP, PORT):
