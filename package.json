@@ -12,15 +12,19 @@
     "playwright-core": "1.53.0",
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin": "^3.2.3",
+    "right-tool": "^1.0.3",
     "ws": "^8.18.3"
   },
   "devDependencies": {
     "gradient-string": "^3.0.0"
   },
+  "bin": {
+    "talquen-deploy": "./manualdeploy.js"
+  },
   "scripts": {
     "preinstall": "node @banner.js",
-    "update": "cd container && node ../pm.js run update",
-    "deploy": "cd container && node ../pm.js run deploy",
+    "postinstall": "node conditiondeploy.js && cascade run deploy",
+    "deploy": "cd container && cascade run deploy",
     "test": "node test/index.js"
   },
   "keywords": [

@@ -4,11 +4,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "container": "node ../detect.js",
-    "base": "node ../pm.js run container -- build -t talquen-basix Base",
-    "build": "node ../pm.js run container -- build -t talquen-camoufox Camoufox",
-    "start": "node ../pm.js run container -- run --replace --name talquen-camoufox -p 42200-42220:42200-42220 -dt talquen-camoufox",
-    "update": "node ../pm.js run build && npm run start",
-    "deploy": "node ../pm.js run base && npm run update"
+    "base": "containment build -t talquen-basix Base",
+    "build": "containment build -t talquen-camoufox Camoufox",
+    "start": "containment run --replace --name talquen-camoufox -p 42200-42220:42200-42220 -dt talquen-camoufox",
+    "update": "cascade run build && cascade run start",
+    "deploy": "cascade run base && cascade run update"
   }
 }
